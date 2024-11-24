@@ -3,9 +3,15 @@ from flask_cors import CORS
 import sqlite3
 import os
 
-app = Flask(__name__)
-CORS(app)
 
+app = Flask(__name__)
+CORS(app, resources={
+    r"/*": {
+        "origins": ["http://localhost:*", "http://94.241.143.9:81", "http://94.241.143.9:81:*"],
+        "methods": ["GET", "POST", "OPTIONS"],
+        "allow_headers": ["Content-Type"]
+    }
+})
 # Configuration
 UPLOAD_FOLDER = 'uploads'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
