@@ -8,6 +8,7 @@ L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
     maxZoom: 19
 }).addTo(map);
 
+
 // Custom marker icon
 const customIcon = L.icon({
     iconUrl: './pictures/pointToGo_high_res.png', // Update with your actual icon path
@@ -62,7 +63,7 @@ function renderEvents(events) {
         const popupContent = `
             <div style="max-width: 250px;">
                 <h3 style="margin-bottom: 10px;">${event.title}</h3>
-                ${event.photoUrl ? `<img src="http://127.0.0.1:5000/${event.photoUrl}" alt="Event Photo" style="width:100%; max-height:150px; object-fit:cover; margin-bottom:8px;">` : ''}
+                ${event.photoUrl ? `<img src="http://127.0.0.1:81/${event.photoUrl}" alt="Event Photo" style="width:100%; max-height:150px; object-fit:cover; margin-bottom:8px;">` : ''}
                 <p style="margin-bottom: 0;">${event.description}</p>
             </div>
         `;
@@ -181,7 +182,7 @@ async function saveEvent(lat, lng) {
     }
 
     try {
-        const response = await fetch('http://127.0.0.1:5000/create-event', {
+        const response = await fetch('http://127.0.0.1:81/create-event', {
             method: 'POST',
             body: formData // Automatically sets the proper headers
         });
@@ -204,7 +205,7 @@ async function saveEvent(lat, lng) {
 // Load all events from the server
 async function loadEvents() {
     try {
-        const response = await fetch('http://127.0.0.1:5000/events');
+        const response = await fetch('http://127.0.0.1:81/events');
         if (!response.ok) {
             throw new Error('Failed to load events.');
         }
@@ -225,7 +226,7 @@ function renderEvents(events) {
         const popupContent = `
             <div style="max-width: 250px;">
                 <h3 style="margin-bottom: 10px;">${event.title}</h3>
-                ${event.photoUrl ? `<img src="http://127.0.0.1:5000/${event.photoUrl}" alt="Event Photo" style="width:100%; max-height:150px; object-fit:cover; margin-bottom:8px;">` : ''}
+                ${event.photoUrl ? `<img src="http://127.0.0.1:81/${event.photoUrl}" alt="Event Photo" style="width:100%; max-height:150px; object-fit:cover; margin-bottom:8px;">` : ''}
                 <p style="margin-bottom: 0;">${event.description}</p>
             </div>
         `;
